@@ -38,6 +38,10 @@ def main():
     cat_fur_mag_log = np.log(1+cat_fur_mag)
 
     combined_img = high_pass_cat + low_pass_headshot
+    combined_fur = fftshift(fft2(combined_img))
+    combined_fur_mag = np.abs(combined_fur)
+    combined_fur_pha = np.angle(combined_fur)
+    combined_fur_mag_log = np.log(1+combined_fur_mag)
 
 
     plt.imsave("deliverables/downsampled_headshot.png", downsampled_img, cmap="gray")
@@ -48,6 +52,7 @@ def main():
     plt.imsave("deliverables/high_pass_cat.png", normalized_cat, cmap="gray")
     plt.imsave("deliverables/cat_fur_mag_log.png", cat_fur_mag_log, cmap="gray")
     plt.imsave("deliverables/combined_img.png", combined_img, cmap="gray")
+    plt.imsave("deliverables/combined_fur_mag_log.png", combined_fur_mag_log, cmap="gray")
 
 if __name__ == "__main__":
     main()
